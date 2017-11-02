@@ -4,20 +4,19 @@ using UnityEngine.Networking;
 
 public class APIClient : MonoBehaviour
 {
-    [HideInInspector] public Item[] itens = null;
+    [HideInInspector] public Modelo3D[] modelos = null;
     private const string baseUrl = "http://localhost:54853/API";
 
 	void Start ()
     {
         StartCoroutine("GetItensAPISync");
-        StartCoroutine("PostItemApiSync");
 	}
 
     IEnumerator GetItensAPISync()
     {
-        UnityWebRequest request = UnityWebRequest.Get(baseUrl + "/Itens");
+        UnityWebRequest request = UnityWebRequest.Get(baseUrl + "/Modelos3D");
 
-        yield return request.Send();
+        yield return request.SendWebRequest();
 
         if(request.isNetworkError || request.isHttpError)
         {
@@ -28,49 +27,22 @@ public class APIClient : MonoBehaviour
             string response = request.downloadHandler.text;
             Debug.Log(response);
 
-            itens = JSonHelper.getJsonArray<Item>(response);
+            modelos = JSonHelper.getJsonArray<Modelo3D>(response);
 
-            foreach (Item i in itens)
+            foreach (Modelo3D i in modelos)
             {
                 ImprimirItem(i);
             }
         }
     }
-
-    IEnumerator PostItemApiSync()
-    {
-        WWWForm form = new WWWForm();
-
-        form.AddField("Nome", "ItemFromUnity");
-        form.AddField("Descrição", "Item enviado por POST para Unity3D");
-        form.AddField("DanoMaximo", "5");
-        form.AddField("Raridade", "90");
-        form.AddField("TipoItemID", "2");
-
-        using (UnityWebRequest request = UnityWebRequest.Post(baseUrl + "/Itens/Create", form))
-        {
-            yield return request.Send();
-            //yield return request.SendWebRequest(); Unity 2017.2  52.219
-
-            if (request.isNetworkError || request.isHttpError)
-            {
-                Debug.Log(request.error);
-            }
-            else
-            {
-                Debug.Log("Envio do item efetudado com sucesso");
-            }
-        }
-    }
-
-    private void ImprimirItem(Item i)
+    private void ImprimirItem(Modelo3D m)
     {
         Debug.Log("=========== Dados do Objeto ===========");
-        Debug.Log("ID: " + i.ItemID);
-        Debug.Log("Nome: " + i.Nome);
-        Debug.Log("Descrição: " + i.Descricao);
-        Debug.Log("Dano Máximo: " + i.DanoMaximo);
-        Debug.Log("Raridade: " + i.Raridade);
-        Debug.Log("Tipo Item ID: " + i.Raridade);
+        Debug.Log("ID: " + m.Modelo3DID);
+        Debug.Log("Nome: " + m.Nome);
+        Debug.Log("História: " + m.Historia);
+        Debug.Log("Altura: " + m.Altura);
+        Debug.Log("Peso: " + m.Peso);
+        Debug.Log("Peso: " + m.Peso);
     }
 }

@@ -10,8 +10,8 @@ namespace Atividade.Models
         public int Modelo3DID { get; set; }
         public string Nome { get; set; }
         public string Historia { get; set; }
-        public float Altura { get; set; }
-        public float Peso { get; set; }
+        public int Altura { get; set; }
+        public int Peso { get; set; }
         public int NumeroDePoligonos { get; set; }
 
         // --------------------------------------//
