@@ -53,8 +53,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\API Client\APIClient.cs" />
      <Compile Include="Assets\Scripts\API Client\JSonHelper.cs" />
+     <Compile Include="Assets\Scripts\Game Controller\GameControllerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Models\Modelo3D.cs" />
      <Compile Include="Assets\Scripts\Models\TipoModelo3D.cs" />
+     <Compile Include="Assets\Scripts\RotatingObjectBehaviour.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
